@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using App.DTOs;
+using App.Helpers.Attributes;
 using App.Repos;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -62,7 +63,8 @@ namespace App.Models
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Character>> GetAll()
+        [Authorize]
+        public ActionResult<IEnumerable<Character>> GetAllCharacters()
         {
             var chars = _mapper.Map<IEnumerable<CharacterReadDto>>(
                 _chars.GetAll()
