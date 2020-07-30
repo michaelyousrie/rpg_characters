@@ -11,7 +11,7 @@ namespace App.Profiles
             CreateMap<Character, CharacterReadDto>();
             CreateMap<Character, CharacterUpdateDto>();
             CreateMap<CharacterUpdateDto, Character>();
-            CreateMap<CharacterCreateDto, Character>();
+            CreateMap<CreateCharacterRequest, Character>();
         }
     }
 }

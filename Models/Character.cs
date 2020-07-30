@@ -1,3 +1,5 @@
+using System;
+
 namespace App.Models
 {
     public class Character : IModel
@@ -6,6 +8,9 @@ namespace App.Models
         public string Name { get; set; }
         public int HP { get; set; } = 100;
         public int HitPoints { get; set; } = 10;
+        public string Weapon { get; set; } = "Sword";
+        public double Height { get; set; } = 100.50;
+        public int Weight { get; set; } = 60;
 
         public Character TakeDamage(int damage)
         {

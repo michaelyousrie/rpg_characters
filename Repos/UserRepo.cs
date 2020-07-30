@@ -18,7 +18,7 @@ namespace App.Repos
         public User Search(string username, string password)
         {
             var user = _DB.Users.FirstOrDefault(c => c.Username == username);
-            
+
             if (user == null ||!Hasher.Verify(password, user.Password)) {
                 return null;
             }
@@ -26,10 +26,12 @@ namespace App.Repos
             return user;
         }
 
-        public override void Create(User user)
+        public override User Create(User user)
         {
             _DB.Users.Add(user);
             SaveChanges();
+
+            return user;
         }
 
         public override void Delete(User user)

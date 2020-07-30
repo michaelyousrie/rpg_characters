@@ -36,6 +36,7 @@ namespace Base
             services.AddScoped<CharacterRepo>();
             services.AddScoped<UserRepo>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<CharacterService>();
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
         }
 

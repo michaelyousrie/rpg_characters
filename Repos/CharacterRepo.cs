@@ -15,10 +15,12 @@ namespace App.Repos
             _DB = context;
         }
 
-        public override void Create(Character character)
+        public override Character Create(Character character)
         {
             _DB.Add(character);
             _DB.SaveChanges();
+
+            return character;
         }
 
         public override void Delete(Character character)

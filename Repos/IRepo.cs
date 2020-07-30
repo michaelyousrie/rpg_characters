@@ -9,7 +9,7 @@ namespace App.Repos
         public abstract void Delete(T obj);
         public abstract void DeleteById(int id);
         public abstract void Update(T obj);
-        public abstract void Create(T obj);
+        public abstract T Create(T obj);
         public abstract void SaveChanges();
     }
 }

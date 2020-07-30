@@ -47,6 +47,11 @@ namespace App.Services
             return _users.GetById(id);
         }
 
+        public User Create(User request)
+        {
+            return _users.Create(request);
+        }
+
         // helper methods
 
         private string generateJwtToken(User user)
