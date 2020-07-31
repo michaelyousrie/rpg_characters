@@ -1,3 +1,4 @@
+using System;
 using App.DTOs.Requests;
 using App.DTOs.Responses;
 using App.Helpers.Attributes;
@@ -55,7 +56,7 @@ namespace App.Controllers.Admin
         }
 
         [HttpPatch("{id}")]
-        public ActionResult<CharacterResponse> UpdateCharacter(int id, UpdateCharacterRequest UpdatedCharacter)
+        public ActionResult<CharacterResponse> UpdateCharacter(int id, UpdateCharacterRequest request)
         {
             var character = _chars.GetById(id);
 
@@ -63,10 +64,32 @@ namespace App.Controllers.Admin
                 return NotFound();
             }
 
-            var updated = _mapper.Map<Character>(UpdatedCharacter);
-            _chars.Update(updated);
+            User user = (User) HttpContext.Items["User"];
 
-            return Ok(updated);
+            foreach (var property in request.GetType().GetProperties()) {
+                var propertyName = property.Name;
+                var propertyValue = character.GetType().GetProperty(propertyName).GetValue(character, null);
+                var updatedPropertyValue = request.GetType().GetProperty(propertyName).GetValue(request, null);
+
+                if (updatedPropertyValue == null) {
+                    request.GetType().GetProperty(propertyName).SetValue(request, propertyValue, null);
+                    continue;
+                }
+
+                if (!user.HasPermissionTo($"edit {propertyName.ToLower()}")) {
+                    return Unauthorized(new {
+                        Message = $"You do NOT have permission to edit the property ({propertyName})"
+                    });
+                }
+            }
+
+            var UpdatedCharacter = _mapper.Map(request, character);
+            _chars.Update(UpdatedCharacter);
+
+            return Ok(new {
+                Message = "Updated successfully!",
+                Character = _mapper.Map<CharacterResponse>(UpdatedCharacter)
+            });
         }
     }
 }

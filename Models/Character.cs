@@ -1,10 +1,12 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace App.Models
 {
     public class Character : IModel
     {
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public int HP { get; set; } = 100;
         public int HitPoints { get; set; } = 10;
