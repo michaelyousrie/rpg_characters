@@ -3,6 +3,7 @@ using System.Linq;
 using App.Data;
 using App.Helpers;
 using App.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.Repos
 {
@@ -48,7 +49,7 @@ namespace App.Repos
 
         public override IEnumerable<User> GetAll()
         {
-            return _DB.Users.ToList();
+            return _DB.Users.Include(u => u.Permissions).ToList();
         }
 
         public override User GetById(int id)

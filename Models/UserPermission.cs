@@ -11,15 +11,12 @@ namespace App.Models
 
         [ForeignKey("User")]
         public int UserId { get; set; }
-        public User User { get; set; }
-
         [Required]
-        public string Permission { get; set; } = "*";
+        public string Permission { get; set; }
 
         public static String[] AvailablePermissions = {
             "Delete Character",
             "Create Character",
-
             "Edit name",
             "Edit hp",
             "Edit hitpoints",

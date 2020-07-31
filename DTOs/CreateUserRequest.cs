@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using App.Models;
-using AutoMapper.Configuration.Annotations;
 
 namespace App.DTOs
 {
@@ -18,7 +15,6 @@ namespace App.DTOs
         [Required]
         public string Password { get; set; }
         public bool IsAdmin { get; set; } = false;
-        [Ignore]
-        public IList<String> Permissions { get; set; }
+        public IList<CreateUserPermissionRequest> Permissions { get; set; }
     }
 }

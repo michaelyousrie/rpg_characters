@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Base.Migrations
 {
     [DbContext(typeof(MysqlContext))]
-    [Migration("20200730134408_InitMigration")]
+    [Migration("20200730171736_InitMigration")]
     partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,9 @@ namespace Base.Migrations
                     b.Property<int>("HP")
                         .HasColumnType("int");
 
+                    b.Property<double>("Height")
+                        .HasColumnType("double");
+
                     b.Property<int>("HitPoints")
                         .HasColumnType("int");
 
@@ -36,35 +39,12 @@ namespace Base.Migrations
                     b.Property<string>("Weapon")
                         .HasColumnType("text");
 
-                    b.Property<double>("height")
-                        .HasColumnType("double");
-
-                    b.Property<int>("weight")
+                    b.Property<int>("Weight")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Characters");
-                });
-
-            modelBuilder.Entity("App.Models.Permission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Permissions")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Permissions");
                 });
 
             modelBuilder.Entity("App.Models.User", b =>
@@ -97,7 +77,27 @@ namespace Base.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("App.Models.Permission", b =>
+            modelBuilder.Entity("App.Models.UserPermission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Permission")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Permissions");
+                });
+
+            modelBuilder.Entity("App.Models.UserPermission", b =>
                 {
                     b.HasOne("App.Models.User", "User")
                         .WithMany("Permissions")

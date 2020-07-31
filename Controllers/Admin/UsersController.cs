@@ -1,10 +1,10 @@
+using System.Collections.Generic;
 using App.DTOs;
 using App.Helpers.Attributes;
 using App.Models;
 using App.Repos;
 using App.Services;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.Controllers.Admin
@@ -27,6 +27,17 @@ namespace App.Controllers.Admin
             _userService = userService;
         }
 
+        [HttpGet]
+        public IActionResult GetAllUsers()
+        {
+            return Ok(
+                _mapper.Map<IEnumerable<UserResponse>>(
+                    _userService.GetAll()
+                )
+            );
+        }
+
+        [HttpPost]
         public IActionResult CreateUser(CreateUserRequest request)
         {
             var user = _userService.Create(_mapper.Map<User>(request));

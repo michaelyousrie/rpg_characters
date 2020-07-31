@@ -17,8 +17,8 @@ namespace Base.Migrations
                     HP = table.Column<int>(nullable: false),
                     HitPoints = table.Column<int>(nullable: false),
                     Weapon = table.Column<string>(nullable: true),
-                    height = table.Column<double>(nullable: false),
-                    weight = table.Column<int>(nullable: false)
+                    Height = table.Column<double>(nullable: false),
+                    Weight = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -34,8 +34,8 @@ namespace Base.Migrations
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: false),
                     Username = table.Column<string>(nullable: false),
-                    IsAdmin = table.Column<bool>(nullable: false),
-                    Password = table.Column<string>(nullable: false)
+                    Password = table.Column<string>(nullable: false),
+                    IsAdmin = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,7 +49,7 @@ namespace Base.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(nullable: false),
-                    Permissions = table.Column<string>(nullable: false)
+                    Permission = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
