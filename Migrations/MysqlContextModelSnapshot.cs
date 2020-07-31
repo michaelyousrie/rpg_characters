@@ -92,12 +92,12 @@ namespace Base.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Permissions");
+                    b.ToTable("UserPermissions");
                 });
 
             modelBuilder.Entity("App.Models.UserPermission", b =>
                 {
-                    b.HasOne("App.Models.User", "User")
+                    b.HasOne("App.Models.User", null)
                         .WithMany("Permissions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

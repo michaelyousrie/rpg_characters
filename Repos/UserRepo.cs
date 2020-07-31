@@ -18,13 +18,18 @@ namespace App.Repos
 
         public User Search(string username, string password)
         {
-            var user = _DB.Users.FirstOrDefault(c => c.Username == username);
+            var user = GetByUsername(username);
 
             if (user == null ||!Hasher.Verify(password, user.Password)) {
                 return null;
             }
 
             return user;
+        }
+
+        public User GetByUsername(string username)
+        {
+            return _DB.Users.FirstOrDefault(c => c.Username == username);
         }
 
         public override User Create(User user)
@@ -54,7 +59,7 @@ namespace App.Repos
 
         public override User GetById(int id)
         {
-            return _DB.Users.FirstOrDefault(u => u.Id == id);
+            return _DB.Users.Include(u => u.Permissions).FirstOrDefault(u => u.Id == id);
         }
 
         public override void Update(User user)

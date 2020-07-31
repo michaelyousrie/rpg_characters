@@ -10,6 +10,6 @@ namespace App.Data
         // DB Sets
         public DbSet<Character> Characters { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<UserPermission> Permissions { get; set; }
+        public DbSet<UserPermission> UserPermissions { get; set; }
     }
 }

@@ -43,7 +43,7 @@ namespace Base.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Permissions",
+                name: "UserPermissions",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -53,9 +53,9 @@ namespace Base.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Permissions", x => x.Id);
+                    table.PrimaryKey("PK_UserPermissions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Permissions_Users_UserId",
+                        name: "FK_UserPermissions_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -63,8 +63,8 @@ namespace Base.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permissions_UserId",
-                table: "Permissions",
+                name: "IX_UserPermissions_UserId",
+                table: "UserPermissions",
                 column: "UserId");
         }
 
@@ -74,7 +74,7 @@ namespace Base.Migrations
                 name: "Characters");
 
             migrationBuilder.DropTable(
-                name: "Permissions");
+                name: "UserPermissions");
 
             migrationBuilder.DropTable(
                 name: "Users");

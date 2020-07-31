@@ -1,6 +1,6 @@
-namespace App.DTOs
+namespace App.DTOs.Requests
 {
-    public class CharacterUpdateDto
+    public class UpdateCharacterRequest
     {
         public string Name { get; set; }
         public int HitPoints { get; set; }

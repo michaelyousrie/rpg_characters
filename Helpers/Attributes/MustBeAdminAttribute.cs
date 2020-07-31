@@ -6,15 +6,14 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace App.Helpers.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class MustBeAdminAttribute : Attribute, IAuthorizationFilter
+    public class MustBeAdminAttribute : AbstractAttribute
     {
-        public void OnAuthorization(AuthorizationFilterContext context)
+        public override void OnAuthorization(AuthorizationFilterContext context)
         {
             var user = (User)context.HttpContext.Items["User"];
             if (user == null || !user.IsAdmin)
             {
-                // not logged in
+                // User is not an admin!
                 context.Result = new JsonResult(new { message = "Unauthorized! You are not an admin!" }) { StatusCode = StatusCodes.Status401Unauthorized };
             }
         }

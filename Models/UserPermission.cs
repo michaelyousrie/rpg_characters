@@ -15,14 +15,14 @@ namespace App.Models
         public string Permission { get; set; }
 
         public static String[] AvailablePermissions = {
-            "Delete Character",
-            "Create Character",
-            "Edit name",
-            "Edit hp",
-            "Edit hitpoints",
-            "Edit weapon",
-            "Edit height",
-            "Edit weight"
+            "delete character",
+            "create character",
+            "edit name",
+            "edit hp",
+            "edit hitpoints",
+            "edit weapon",
+            "edit height",
+            "edit weight"
         };
     }
 }

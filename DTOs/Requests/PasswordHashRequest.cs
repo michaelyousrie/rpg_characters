@@ -1,4 +1,4 @@
-namespace App.DTOs
+namespace App.DTOs.Requests
 {
     public class PasswordHashRequest
     {

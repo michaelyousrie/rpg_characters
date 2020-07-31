@@ -23,34 +23,20 @@ namespace App.Models
         public bool IsAdmin { get; set; } = false;
         public IList<UserPermission> Permissions { get; set; }
 
-        private bool Can(string permission)
+        public bool HasPermissionTo(string perm)
         {
             if (IsAdmin) {
                 return true;
             }
 
-            return Permissions.Contains(new UserPermission { Permission = "*" }) || Permissions.Contains(new UserPermission { Permission = permission });
-        }
+            perm = perm.ToLower();
 
-        public bool CanEditProperty(string property)
-        {
-            string PermissionString = "Edit " + property.ToLower();
-
-            if (! UserPermission.AvailablePermissions.Contains(PermissionString)) {
-                return false;
-            }
-
-            return Can(PermissionString);
-        }
-
-        public bool CanDeleteCharacter()
-        {
-            return Can("Delete Character");
-        }
-
-        public bool CanCreateCharacter()
-        {
-            return Can("Create Character");
+            return
+                UserPermission.AvailablePermissions.Contains(perm) &&
+                Permissions.FirstOrDefault(p =>
+                    p.Permission.ToLower().Equals("*") ||
+                    p.Permission.ToLower().Equals(perm)
+                ) != null;
         }
     }
 }

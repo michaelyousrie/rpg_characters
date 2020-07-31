@@ -6,10 +6,9 @@ using System;
 
 namespace App.Helpers.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class AuthorizeAttribute : Attribute, IAuthorizationFilter
+    public class AuthorizeAttribute : AbstractAttribute
     {
-        public void OnAuthorization(AuthorizationFilterContext context)
+        public override void OnAuthorization(AuthorizationFilterContext context)
         {
             var user = (User)context.HttpContext.Items["User"];
             if (user == null)

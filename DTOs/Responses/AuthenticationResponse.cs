@@ -1,6 +1,6 @@
 using App.Models;
 
-namespace App.DTOs
+namespace App.DTOs.Responses
 {
      public class AuthenticateResponse
     {

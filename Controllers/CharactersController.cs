@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using App.DTOs;
+using App.DTOs.Requests;
+using App.DTOs.Responses;
 using App.Helpers.Attributes;
 using App.Repos;
 using App.Services;
@@ -24,7 +25,7 @@ namespace App.Models
         }
 
         [HttpPost("attack")]
-        public IActionResult AttackCharacter(CharacterAttackInputDto request)
+        public IActionResult AttackCharacter(AttackCharacterRequest request)
         {
             var attacker = _chars.GetById(request.AttackerId);
             var victim = _chars.GetById(request.VictimId);
@@ -43,8 +44,8 @@ namespace App.Models
             return Ok(
                 new {
                     Message = "Attack Successful!",
-                    Attacker = _mapper.Map<CharacterReadDto>(attacker),
-                    Victim = _mapper.Map<CharacterReadDto>(victim)
+                    Attacker = _mapper.Map<CharacterResponse>(attacker),
+                    Victim = _mapper.Map<CharacterResponse>(victim)
                 }
             );
         }
@@ -53,13 +54,13 @@ namespace App.Models
         [Authorize]
         public ActionResult<IEnumerable<Character>> GetAllCharacters()
         {
-            var chars = _mapper.Map<IEnumerable<CharacterReadDto>>(_chars.GetAll());
+            var chars = _mapper.Map<IEnumerable<CharacterResponse>>(_chars.GetAll());
 
             return Ok(chars);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<CharacterReadDto> GetCharacter(int id)
+        public ActionResult<CharacterResponse> GetCharacter(int id)
         {
             var character = _chars.GetById(id);
 
@@ -68,7 +69,7 @@ namespace App.Models
             }
 
             return Ok(
-                _mapper.Map<CharacterReadDto> (character)
+                _mapper.Map<CharacterResponse> (character)
             );
         }
     }

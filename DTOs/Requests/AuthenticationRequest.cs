@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace App.DTOs
+namespace App.DTOs.Requests
 {
     public class AuthenticateRequest
     {

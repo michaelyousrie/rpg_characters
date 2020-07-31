@@ -1,4 +1,4 @@
-using App.DTOs;
+using App.DTOs.Requests;
 using App.Helpers;
 using Microsoft.AspNetCore.Mvc;
 

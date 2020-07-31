@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace App.DTOs
+namespace App.DTOs.Requests
 {
     public class CreateUserRequest
     {

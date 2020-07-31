@@ -3,13 +3,13 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using App.Models;
-using App.DTOs;
 using App.Helpers;
 using App.Repos;
+using App.DTOs.Responses;
+using App.DTOs.Requests;
 
 namespace App.Services
 {
@@ -50,6 +50,11 @@ namespace App.Services
         public User Create(User request)
         {
             return _users.Create(request);
+        }
+
+        public User GetByUsername(string username)
+        {
+            return _users.GetByUsername(username);
         }
 
         // helper methods

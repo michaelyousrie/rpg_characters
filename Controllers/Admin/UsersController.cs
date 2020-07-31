@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using App.DTOs;
+using App.DTOs.Requests;
+using App.DTOs.Responses;
 using App.Helpers.Attributes;
 using App.Models;
 using App.Repos;
@@ -40,6 +42,12 @@ namespace App.Controllers.Admin
         [HttpPost]
         public IActionResult CreateUser(CreateUserRequest request)
         {
+            if (_userService.GetByUsername(request.Username) != null) {
+                return UnprocessableEntity(new {
+                    Message = $"The username ({request.Username}) already exists!"
+                });
+            }
+
             var user = _userService.Create(_mapper.Map<User>(request));
 
             return Ok(new {
