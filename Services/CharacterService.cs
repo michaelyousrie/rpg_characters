@@ -23,5 +23,10 @@ namespace App.Services
 
             return CreatedCharacter;
         }
+
+        public bool NameExists(string name)
+        {
+            return _chars.NameExists(name);
+        }
     }
 }

@@ -15,6 +15,11 @@ namespace App.Repos
             _DB = context;
         }
 
+        public bool NameExists(string name)
+        {
+            return _DB.Characters.FirstOrDefault(c => c.Name == name) != null;
+        }
+
         public override Character Create(Character character)
         {
             _DB.Add(character);

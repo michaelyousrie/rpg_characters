@@ -30,6 +30,12 @@ namespace App.Controllers.Admin
         [MustHavePermissionTo("create character")]
         public IActionResult CreateCharacter(CreateCharacterRequest request)
         {
+            if (_charService.NameExists(request.Name)) {
+                return UnprocessableEntity(new {
+                    Message = $"There's already a character with the name ({request.Name})"
+                });
+            }
+
             var createdChar = _charService.Create(request);
 
             return Ok(new {
@@ -55,13 +61,19 @@ namespace App.Controllers.Admin
             );
         }
 
-        [HttpPatch("{id}")]
+        [HttpPut("{id}")]
         public ActionResult<CharacterResponse> UpdateCharacter(int id, UpdateCharacterRequest request)
         {
             var character = _chars.GetById(id);
 
             if (character == null) {
                 return NotFound();
+            }
+
+            if (request.Name != null && _charService.NameExists(request.Name)) {
+                return UnprocessableEntity(new {
+                    Message = $"There's already a character with the name ({request.Name})"
+                });
             }
 
             User user = (User) HttpContext.Items["User"];
